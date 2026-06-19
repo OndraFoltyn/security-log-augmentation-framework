@@ -1,11 +1,40 @@
-# deepAugmentator
+# security-log-augmentation-framework
 
-Neural contextual generation (NCG) component of the security log augmentation framework. Fine-tunes transformer-based language models on security log datasets and uses them to fill masked entity spans in log records.
+## Security Log Augmentation
+
+This repository contains the core implementation accompanying the paper:
+
+**Semantics-Preserving Security Log Augmentation for Robust Machine Learning in SIEM Systems**
+
+The project provides a domain-aware augmentation framework for security logs. Unlike generic text augmentation, the framework treats security logs as semi-structured operational records whose meaning depends on typed entities, field relationships, source-specific syntax, and character-level annotation consistency.
+
+## Overview
+
+The framework is designed to generate diverse training data for AI-supported security-log processing while preserving semantic and structural validity. It operates on span-aware log records and uses a standardized model of security-specific metakeys to control which values may be modified and how.
+
+The main components include:
+
+- a standardized metakey model for security-relevant log attributes,
+- metakey-guided augmentation policies,
+- span-aware representation of annotated log records,
+- value-level and record-level augmentation operators,
+- pattern-based, list-based, and neural contextual value generation,
+- validation mechanisms for preserving annotation alignment.
+
+## Research Context
+
+The implementation was developed as part of research on AI-supported security monitoring and SIEM-oriented log processing. The framework was evaluated on a Named Entity Recognition (NER) task with exact span matching, where NER is treated as a prerequisite for downstream SIEM-related processing such as parsing, normalization, enrichment, and correlation.
+
+---
+
+## NCG Component
+
+This module implements the **neural contextual generation (NCG)** component of the framework. It fine-tunes transformer-based language models on security log datasets and uses them to fill masked entity spans in log records.
 
 ## Structure
 
 ```
-deepAugmentator/
+security-log-augmentation-framework/
 ├── pipeline/
 │   ├── pipeline.py               # Main DeepAugmentator class — loads model from MLflow, runs augmentation
 │   ├── AI_augmentator.py         # Fill-mask augmentation (MLM models: RoBERTa, ALBERT, MobileBERT, ELECTRA)
